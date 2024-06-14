@@ -3,9 +3,10 @@ import "./style.css";
 import Weathercard from "./Weathercard";
 
 const Temp = () => {
-  const [searchValue, setSearchValue] = useState("ahmedabad");
+  const [searchValue, setSearchValue] = useState("Ahmedabad");
   const [tempInfo, setTempInfo] = useState({});
-  const GetWeatherInfo = async () => {
+
+  const getWeatherData = async () => {
     try {
       let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=71e404ed0cd56880513cbb359976a2e3`;
 
@@ -30,10 +31,14 @@ const Temp = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const GetWeatherInfo = async () => {
+    getWeatherData();
     setSearchValue("");
   };
   useEffect(() => {
-    GetWeatherInfo();
+    getWeatherData();
   }, []);
   const handleKey = (e) => {
     if (e.key === "Enter") {
